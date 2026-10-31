@@ -15,7 +15,7 @@ def _cors_origins() -> tuple[str, ...]:
 @dataclass(frozen=True, slots=True)
 class Settings:
     name: str = "MoXi API"
-    version: str = field(default_factory=lambda: os.getenv("MOXI_VERSION", "0.1.0"))
+    version: str = field(default_factory=lambda: os.getenv("MOXI_VERSION", "0.2.0"))
     environment: str = field(default_factory=lambda: os.getenv("MOXI_ENV", "development"))
     cors_origins: tuple[str, ...] = field(default_factory=_cors_origins)
 
