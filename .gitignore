@@ -1,0 +1,31 @@
+# 依赖
+node_modules/
+frontend/node_modules/
+backend/__pycache__/
+backend/**/__pycache__/
+*.pyc
+.pytest_cache/
+
+# 构建产物
+frontend/dist/
+release/
+
+# 环境与本地文件
+.env
+.env.*
+!.env.example
+# 这个文件里只有接口前缀，没有密钥，必须进仓库否则构建出来的路径是错的
+!frontend/.env.production
+*.log
+
+# 截图脚本产出的临时验证图
+.shots/
+
+# 编辑器
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# 本地工具目录
+.workbuddy/

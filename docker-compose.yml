@@ -1,0 +1,29 @@
+name: moxi
+
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    # 只绑本机，公网流量一律走 Nginx。8001 与同机的 xiangq（8000）错开。
+    ports:
+      - "127.0.0.1:${MOXI_PORT:-8001}:8000"
+    mem_limit: 256m
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+    environment:
+      MOXI_ENV: production
+      # 同域部署时留空即可；前后端不同域才需要填公网来源。
+      MOXI_CORS_ORIGINS: "${MOXI_CORS_ORIGINS:-}"
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/health', timeout=3)"
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
